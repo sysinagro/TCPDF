@@ -372,6 +372,10 @@ class TCPDFBarcode {
 				$arrcode = $this->barcode_pharmacode2t($code);
 				break;
 			}
+			case 'EBCT': {	// CORREIOS BRASILEIROS
+				$arrcode = $this->barcode_128_correios($code);
+				break;
+			}
 			default: {
 				$this->barcode_array = false;
 				$arrcode = false;
@@ -1277,6 +1281,341 @@ class TCPDFBarcode {
 			}
 		}
 		return $bararray;
+	}
+
+	protected function barcode_128_correios($code) {
+		$BarcodePattern[0] = "212222"; // <SPACE>
+		$BarcodePattern[1] = "222122"; // !
+		$BarcodePattern[2] = "222221"; // "
+		$BarcodePattern[3] = "121223"; // #
+		$BarcodePattern[4] = "121322"; // $
+		$BarcodePattern[5] = "131222"; // %
+		$BarcodePattern[6] = "122213"; // &
+		$BarcodePattern[7] = "122312"; // //
+		$BarcodePattern[8] = "132212"; // (
+		$BarcodePattern[9] = "221213"; // )
+		$BarcodePattern[10] = "221312"; // *
+		$BarcodePattern[11] = "231212"; // +
+		$BarcodePattern[12] = "112232"; // ,
+		$BarcodePattern[13] = "122132"; // -
+		$BarcodePattern[14] = "122231"; // .
+		$BarcodePattern[15] = "113222"; // /
+		$BarcodePattern[16] = "123122"; // 0
+		$BarcodePattern[17] = "123221"; // 1
+		$BarcodePattern[18] = "223211"; // 2
+		$BarcodePattern[19] = "221132"; // 3
+		$BarcodePattern[20] = "221231"; // 4
+		$BarcodePattern[21] = "213212"; // 5
+		$BarcodePattern[22] = "223112"; // 6
+		$BarcodePattern[23] = "312131"; // 7
+		$BarcodePattern[24] = "311222"; // 8
+		$BarcodePattern[25] = "321122"; // 9
+		$BarcodePattern[26] = "321221"; // :
+		$BarcodePattern[27] = "312212"; // ;
+		$BarcodePattern[28] = "322112"; // <
+		$BarcodePattern[29] = "322211"; // =
+		$BarcodePattern[30] = "212123"; // >
+		$BarcodePattern[31] = "212321"; // ?
+		$BarcodePattern[32] = "232121"; // @
+		$BarcodePattern[33] = "111323"; // A
+		$BarcodePattern[34] = "131123"; // B
+		$BarcodePattern[35] = "131321"; // C
+		$BarcodePattern[36] = "112313"; // D
+		$BarcodePattern[37] = "132113"; // E
+		$BarcodePattern[38] = "132311"; // F
+		$BarcodePattern[39] = "211313"; // G
+		$BarcodePattern[40] = "231113"; // H
+		$BarcodePattern[41] = "231311"; // I
+		$BarcodePattern[42] = "112133"; // J
+		$BarcodePattern[43] = "112331"; // K
+		$BarcodePattern[44] = "132131"; // L
+		$BarcodePattern[45] = "113123"; // M
+		$BarcodePattern[46] = "113321"; // N
+		$BarcodePattern[47] = "133121"; // O
+		$BarcodePattern[48] = "313121"; // P
+		$BarcodePattern[49] = "211331"; // Q
+		$BarcodePattern[50] = "231131"; // R
+		$BarcodePattern[51] = "213113"; // S
+		$BarcodePattern[52] = "213311"; // T
+		$BarcodePattern[53] = "213131"; // U
+		$BarcodePattern[54] = "311123"; // V
+		$BarcodePattern[55] = "311321"; // W
+		$BarcodePattern[56] = "331121"; // X
+		$BarcodePattern[57] = "312113"; // Y
+		$BarcodePattern[58] = "312311"; // Z
+		$BarcodePattern[59] = "332111"; // [
+		$BarcodePattern[60] = "314111"; // /
+		$BarcodePattern[61] = "221411"; // ]
+		$BarcodePattern[62] = "431111"; // ^
+		$BarcodePattern[63] = "111224"; // _
+		$BarcodePattern[64] = "111422"; // `
+		$BarcodePattern[65] = "121124"; // a
+		$BarcodePattern[66] = "121421"; // b
+		$BarcodePattern[67] = "141122"; // c
+		$BarcodePattern[68] = "141221"; // d
+		$BarcodePattern[69] = "112214"; // e
+		$BarcodePattern[70] = "112412"; // f
+		$BarcodePattern[71] = "122114"; // g
+		$BarcodePattern[72] = "122411"; // h
+		$BarcodePattern[73] = "142112"; // i
+		$BarcodePattern[74] = "142211"; // j
+		$BarcodePattern[75] = "241211"; // k
+		$BarcodePattern[76] = "221114"; // l
+		$BarcodePattern[77] = "413111"; // m
+		$BarcodePattern[78] = "241112"; // n
+		$BarcodePattern[79] = "134111"; // o
+		$BarcodePattern[80] = "111242"; // p
+		$BarcodePattern[81] = "121142"; // q
+		$BarcodePattern[82] = "121241"; // r
+		$BarcodePattern[83] = "114212"; // s
+		$BarcodePattern[84] = "124112"; // t
+		$BarcodePattern[85] = "124211"; // u
+		$BarcodePattern[86] = "411212"; // v
+		$BarcodePattern[87] = "421112"; // w
+		$BarcodePattern[88] = "421211"; // x
+		$BarcodePattern[89] = "212141"; // y
+		$BarcodePattern[90] = "214121"; // z
+		$BarcodePattern[91] = "412121"; // {
+		$BarcodePattern[92] = "111143"; // |
+		$BarcodePattern[93] = "111341"; // }
+		$BarcodePattern[94] = "131141"; // ~
+		$BarcodePattern[95] = "114113";
+		$BarcodePattern[96] = "114311";
+		$BarcodePattern[97] = "411113";
+		$BarcodePattern[98] = "411311";
+		$BarcodePattern[99] = "113141";
+		$BarcodePattern[100] = "114131";
+		$BarcodePattern[101] = "311141";
+		$BarcodePattern[102] = "411131";
+		$BarcodePattern[103] = "211412";
+		$BarcodePattern[104] = "211214";
+		$BarcodePattern[105] = "211232"; //START C
+		$BarcodePattern[106] = "2331112"; //STOP
+
+		//Criando uma variavel codigo com o codigo de barras a ser gerado passado como parametro para a funcao
+		$codigo = $code;
+
+		//Calculando o digito verificador do codigo de barras
+		$somadordigito = 103; //START A
+		//Pegar valor correto ASC do caracter
+		$somadordigito += ord(substr($codigo,0,1))-32; //Primeiro caracter do codigo
+		$somadordigito += (ord(substr($codigo,1,1))-32)*2; //Segundo caracter do codigo
+		$somadordigito += 297; //COD C (99) * 3
+
+		//Caracteres Numericos em pares
+		$j = 4;
+		for($i=2;$i<9;$i=$i+2) {
+			$cod = (int)substr($codigo,$i,2);
+			$somadordigito += ($cod*$j);
+			$j = $j + 1;
+		}
+
+		$somadordigito += 808; //COD A (101) * 8
+
+		$somadordigito += (((int) ord(substr($codigo,10,1)))-32) * 9; //Ultimo caracter numerico
+
+		//Ultimos caracteres
+		if(substr($codigo,11,2) == "BR") {
+			$somadordigito += 890;
+		} else if(substr($codigo,11,2) == "IN") {
+			$somadordigito += 916;
+		}
+
+		//Digito Verificador
+		$digitoVerificador = $somadordigito % 103;
+
+		//Montando o array de retorno
+		$arrayBarra = array();
+		$arrayBarra["code"] = $code;
+		$arrayBarra["maxw"] = 178;
+		$arrayBarra["maxh"] = 1;
+		$arrayBarra["bcode"] = array();
+
+		$arrayBarra = array('code' => $code, 'maxw' => 0, 'maxh' => 1, 'bcode' => array());
+
+		//INICIO A
+		$seq = $BarcodePattern[103];
+		for ($j = 0; $j < 6; ++$j) {
+			if (($j % 2) == 0) {
+				$t = true; // bar
+			} else {
+				$t = false; // space
+			}
+			$w = $seq{$j};
+			$arrayBarra['bcode'][] = array('t' => $t, 'w' => $w, 'h' => 1, 'p' => 0);
+			$arrayBarra['maxw'] += $w;
+		}
+
+		//PRIMEIRO CARACTER DO CODIGO DOS CORREIOS (POSICAO 0)
+		$seq = $BarcodePattern[ord(substr($codigo,0,1))-32];
+		for ($j = 0; $j < 6; ++$j) {
+			if (($j % 2) == 0) {
+				$t = true; // bar
+			} else {
+				$t = false; // space
+			}
+			$w = $seq{$j};
+			$arrayBarra['bcode'][] = array('t' => $t, 'w' => $w, 'h' => 1, 'p' => 0);
+			$arrayBarra['maxw'] += $w;
+		}
+
+		//SEGUNDO CARACTER DO CODIGO DOS CORREIOS (POSICAO 1)
+		$seq = $BarcodePattern[ord(substr($codigo,1,1))-32];
+		for ($j = 0; $j < 6; ++$j) {
+			if (($j % 2) == 0) {
+				$t = true; // bar
+			} else {
+				$t = false; // space
+			}
+			$w = $seq{$j};
+			$arrayBarra['bcode'][] = array('t' => $t, 'w' => $w, 'h' => 1, 'p' => 0);
+			$arrayBarra['maxw'] += $w;
+		}
+
+		//COD C
+		$seq = $BarcodePattern[99];
+		for ($j = 0; $j < 6; ++$j) {
+			if (($j % 2) == 0) {
+				$t = true; // bar
+			} else {
+				$t = false; // space
+			}
+			$w = $seq{$j};
+			$arrayBarra['bcode'][] = array('t' => $t, 'w' => $w, 'h' => 1, 'p' => 0);
+			$arrayBarra['maxw'] += $w;
+		}
+
+		//PRIMEIRO CONJUNTO NUMERICO DO CODIGO DOS CORREIOS (POSICOES 2 E 3 DO CODIGO)
+		$seq = $BarcodePattern[(int)(substr($codigo,2,2))];
+		for ($j = 0; $j < 6; ++$j) {
+			if (($j % 2) == 0) {
+				$t = true; // bar
+			} else {
+				$t = false; // space
+			}
+			$w = $seq{$j};
+			$arrayBarra['bcode'][] = array('t' => $t, 'w' => $w, 'h' => 1, 'p' => 0);
+			$arrayBarra['maxw'] += $w;
+		}
+
+		//SEGUNDO CONJUNTO NUMERICO DO CODIGO DOS CORREIOS (POSICOES 4 E 5 DO CODIGO)
+		$seq = $BarcodePattern[(int)(substr($codigo,4,2))];
+		for ($j = 0; $j < 6; ++$j) {
+			if (($j % 2) == 0) {
+				$t = true; // bar
+			} else {
+				$t = false; // space
+			}
+			$w = $seq{$j};
+			$arrayBarra['bcode'][] = array('t' => $t, 'w' => $w, 'h' => 1, 'p' => 0);
+			$arrayBarra['maxw'] += $w;
+		}
+
+		//PRIMEIRO CONJUNTO NUMERICO DO CODIGO DOS CORREIOS (POSICOES 6 E 7 DO CODIGO)
+		$seq = $BarcodePattern[(int)(substr($codigo,6,2))];
+		for ($j = 0; $j < 6; ++$j) {
+			if (($j % 2) == 0) {
+				$t = true; // bar
+			} else {
+				$t = false; // space
+			}
+			$w = $seq{$j};
+			$arrayBarra['bcode'][] = array('t' => $t, 'w' => $w, 'h' => 1, 'p' => 0);
+			$arrayBarra['maxw'] += $w;
+		}
+
+		//PRIMEIRO CONJUNTO NUMERICO DO CODIGO DOS CORREIOS (POSICOES 8 E 9 DO CODIGO)
+		$seq = $BarcodePattern[(int)(substr($codigo,8,2))];
+		for ($j = 0; $j < 6; ++$j) {
+			if (($j % 2) == 0) {
+				$t = true; // bar
+			} else {
+				$t = false; // space
+			}
+			$w = $seq{$j};
+			$arrayBarra['bcode'][] = array('t' => $t, 'w' => $w, 'h' => 1, 'p' => 0);
+			$arrayBarra['maxw'] += $w;
+		}
+
+		//COD A
+		$seq = $BarcodePattern[101];
+		for ($j = 0; $j < 6; ++$j) {
+			if (($j % 2) == 0) {
+				$t = true; // bar
+			} else {
+				$t = false; // space
+			}
+			$w = $seq{$j};
+			$arrayBarra['bcode'][] = array('t' => $t, 'w' => $w, 'h' => 1, 'p' => 0);
+			$arrayBarra['maxw'] += $w;
+		}
+
+		//DIGITO VERIFICADOR DO CODIGO DOS CORREIOS (POSICAO 10)
+		$seq = $BarcodePattern[ord(substr($codigo,10,1))-32];
+		for ($j = 0; $j < 6; ++$j) {
+			if (($j % 2) == 0) {
+				$t = true; // bar
+			} else {
+				$t = false; // space
+			}
+			$w = $seq{$j};
+			$arrayBarra['bcode'][] = array('t' => $t, 'w' => $w, 'h' => 1, 'p' => 0);
+			$arrayBarra['maxw'] += $w;
+		}
+
+		//PRIMEIRO CARACTER DO CODIGO DE NACIONALIDADE DA POSTAGEM (POSICAO 11)
+		$seq = $BarcodePattern[ord(substr($codigo,11,1))-32];
+		for ($j = 0; $j < 6; ++$j) {
+			if (($j % 2) == 0) {
+				$t = true; // bar
+			} else {
+				$t = false; // space
+			}
+			$w = $seq{$j};
+			$arrayBarra['bcode'][] = array('t' => $t, 'w' => $w, 'h' => 1, 'p' => 0);
+			$arrayBarra['maxw'] += $w;
+		}
+
+		//SEGUNDO CARACTER DO CODIGO DE NACIONALIDADE DA POSTAGEM (POSICAO 12)
+		$seq = $BarcodePattern[ord(substr($codigo,12,1))-32];
+		for ($j = 0; $j < 6; ++$j) {
+			if (($j % 2) == 0) {
+				$t = true; // bar
+			} else {
+				$t = false; // space
+			}
+			$w = $seq{$j};
+			$arrayBarra['bcode'][] = array('t' => $t, 'w' => $w, 'h' => 1, 'p' => 0);
+			$arrayBarra['maxw'] += $w;
+		}
+
+		//DIGITO VERIFICADOR CALCULADO DO CODIGO DE BARRAS GERADO
+		$seq = $BarcodePattern[$digitoVerificador];
+		for ($j = 0; $j < 6; ++$j) {
+			if (($j % 2) == 0) {
+				$t = true; // bar
+			} else {
+				$t = false; // space
+			}
+			$w = $seq{$j};
+			$arrayBarra['bcode'][] = array('t' => $t, 'w' => $w, 'h' => 1, 'p' => 0);
+			$arrayBarra['maxw'] += $w;
+		}
+
+		//STOP
+		$seq = $BarcodePattern[106];
+		for ($j = 0; $j < 7; ++$j) {
+			if (($j % 2) == 0) {
+				$t = true; // bar
+			} else {
+				$t = false; // space
+			}
+			$w = $seq{$j};
+			$arrayBarra['bcode'][] = array('t' => $t, 'w' => $w, 'h' => 1, 'p' => 0);
+			$arrayBarra['maxw'] += $w;
+		}
+
+		return $arrayBarra;
 	}
 
 	/**
