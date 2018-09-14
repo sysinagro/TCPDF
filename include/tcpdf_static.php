@@ -1874,6 +1874,10 @@ class TCPDF_STATIC {
 				}
 			}
 		}
+		if (!@file_exists($filename)) {
+			// try to encode spaces on filename
+			$filename = str_replace(' ', '%20', $filename);
+		}
 		return @file_exists($filename);
 	}
 
