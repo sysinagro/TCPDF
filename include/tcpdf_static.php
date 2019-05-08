@@ -1855,6 +1855,33 @@ class TCPDF_STATIC {
 	}
 
 	/**
+	 * Wrapper for file_exists.
+	 * Checks whether a file or directory exists.
+	 * Only allows some protocols and local files.
+	 * @param filename (string) Path to the file or directory. 
+	 * @return Returns TRUE if the file or directory specified by filename exists; FALSE otherwise.  
+	 * @public static
+	 */
+	public static function file_exists($filename) {
+		if (strpos($filename, '://') > 0) {
+			$wrappers = stream_get_wrappers();
+			foreach ($wrappers as $wrapper) {
+				if (($wrapper === 'http') || ($wrapper === 'https')) {
+					continue;
+				}
+				if (stripos($filename, $wrapper.'://') === 0) {
+					return false;
+				}
+			}
+		}
+		if (!@file_exists($filename)) {
+			// try to encode spaces on filename
+			$filename = str_replace(' ', '%20', $filename);
+		}
+		return @file_exists($filename);
+	}
+
+	/**
 	 * Reads entire file into a string.
 	 * The file can be also an URL.
 	 * @param $file (string) Name of the file or URL to read.
@@ -1914,8 +1941,10 @@ class TCPDF_STATIC {
 		}
 		//
 		$alt = array_unique($alt);
-		//var_dump($alt);exit;//DEBUG
 		foreach ($alt as $path) {
+			if (!self::file_exists($path)) {
+				return false;
+			}
 			$ret = @file_get_contents($path);
 			if ($ret !== false) {
 			    return $ret;
@@ -1948,8 +1977,6 @@ class TCPDF_STATIC {
 		}
 		return false;
 	}
-
-    
 
 	/**
 	 * Get ULONG from string (Big Endian 32-bit unsigned integer).
